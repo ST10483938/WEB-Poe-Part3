@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Khanya's Community Garden - Growing together, nurturing community. Organic vegetables, workshops, and community events in the heart of our neighborhood.">
+    <meta name="keywords" content="community garden, organic vegetables, urban farming, gardening workshops, sustainable agriculture, local produce, Khanya garden">
+    <title>Khanya's Community Garden | Growing Together, Nurturing Community</title>
+    
+    <!-- Leaflet CSS for Maps -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+    
+    
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2d3436;
+            background-color: #f0f7f4;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav li {
+            margin: 0 1.5rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        /* Header/Hero Section */
+        .hero {
+            background: linear-gradient(rgba(39, 174, 96, 0.8), rgba(34, 153, 84, 0.8)),
+                        url('https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=1600') center/cover;
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Sections */
+        section {
+            background: white;
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #27ae60;
+            font-size: 2rem;
+            border-bottom: 3px solid #27ae60;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            color: #229954;
+            margin-bottom: 1rem;
+        }
+
+        /* Accordion Styles */
+        .accordion {
+            margin: 1rem 0;
+        }
+
+        .accordion-item {
+            border: 2px solid #d5f4e6;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s;
+            font-weight: 600;
+        }
+
+        .accordion-header:hover {
+            opacity: 0.9;
+        }
+
+        .accordion-header::after {
+            content: '+';
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .accordion-header.active::after {
+            transform: rotate(45deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: #f9fdf9;
+        }
+
+        .accordion-content.active {
+            max-height: 500px;
+        }
+
+        .accordion-body {
+            padding: 1.5rem;
+            line-height: 1.8;
+        }
+
+        /* Tabs Styles */
+        .tabs {
+            margin: 2rem 0;
+        }
+
+        .tab-buttons {
+            display: flex;
+            border-bottom: 2px solid #27ae60;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 1rem 2rem;
+            cursor: pointer;
+            font-size: 1rem;
+            color: #27ae60;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            font-weight: 600;
+        }
+
+        .tab-button:hover {
+            background: #f0f7f4;
+        }
+
+        .tab-button.active {
+            border-bottom-color: #27ae60;
+            font-weight: bold;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 2rem 0;
+            animation: fadeIn 0.5s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Map Container */
+        #map {
+            height: 450px;
+            width: 100%;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border: 3px solid #27ae60;
+        }
+
+        /* Gallery Styles */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(39, 174, 96, 0.9);
+            color: white;
+            padding: 0.5rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: white;
+            font-size: 3rem;
+            cursor: pointer;
+            z-index: 2001;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #2d3436;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #d5f4e6;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #27ae60;
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .form-group.error input,
+        .form-group.error textarea,
+        .form-group.error select {
+            border-color: #e74c3c;
+        }
+
+        .form-group.error .error-message {
+            display: block;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .success-message {
+            background: #27ae60;
+            color: white;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: slideDown 0.5s;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Dynamic Content Section */
+        .search-container {
+            margin: 2rem 0;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #27ae60;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .product-card {
+            background: white;
+            border: 2px solid #d5f4e6;
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(39, 174, 96, 0.2);
+        }
+
+        .product-card h3 {
+            color: #27ae60;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            color: #27ae60;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+
+        .product-category {
+            display: inline-block;
+            background: #d5f4e6;
+            color: #27ae60;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            nav li {
+                margin: 0.5rem 0;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .tab-button {
+                padding: 0.75rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="home">Home</a></li>
+            <li><a href="about">About Us</a></li>
+            <li><a href="programs">Programs</a></li>
+            <li><a href="gallery">Gallery</a></li>
+            <li><a href="produce">Fresh Produce</a></li>
+            <li><a href="events">Events</a></li>
+            <li><a href="location">Visit Us</a></li>
+            <li><a href="contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero" id="home">
+        <h1> Khanya's Community Garden </h1>
+        <p>Growing Together, Nurturing Community</p>
+        <p>Where neighbors become family and seeds become sustenance</p>
+    </div>
+
+    <div class="container">
+        <!-- About Section with Stats -->
+        <section id="about">
+            <h2>About Khanya's Community Garden</h2>
+            <p>Welcome to Khanya's Community Garden, a vibrant green oasis in the heart of our neighborhood. Since 2018, we've been bringing people together through the joy of growing fresh, organic produce while building lasting connections and promoting sustainable living.</p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Community Members</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Garden Plots</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">2000kg</div>
+                    <div class="stat-label">Annual Harvest</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Organic & Sustainable</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Programs Section with Accordion -->
+        <section id="programs">
+            <h2>Our Programs & Initiatives</h2>
+            <p>Explore our diverse programs designed to educate, engage, and empower our community.</p>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span> Community Garden Plots</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            Rent your own garden plot and grow fresh vegetables, herbs, and flowers. Our 4x8 ft plots come with water access, organic soil, and expert guidance. Perfect for families, individuals, or groups wanting to experience the joy of growing their own food. Monthly plot rental: $25/month (discounts available for seniors and students).
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span> Gardening Workshops</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            Join our monthly workshops covering topics like organic pest control, composting, seed saving, seasonal planting, and permaculture design. Led by experienced gardeners and agricultural experts. All skill levels welcome! Workshops are held every second Saturday at 10 AM. Free for members, $10 for non-members.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span> Youth Education Program</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            Our youth program introduces children ages 6-16 to gardening, nutrition, and environmental stewardship. Through hands-on activities, kids learn where food comes from, the importance of biodiversity, and gain valuable life skills. After-school programs run Tuesday and Thursday, 3-5 PM. Summer camp available in July and August.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span> Food Security Initiative</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            We donate 30% of our harvest to local food banks and families in need. Our community meals program serves fresh, garden-grown food every Friday evening. We believe everyone deserves access to healthy, nutritious produce regardless of their financial situation. Volunteers always welcome!
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span> Sustainability & Composting</span>
+                    </div>
+                    <div class="accordion-content">
+                        <div class="accordion-body">
+                            Our composting program diverts over 2 tons of organic waste from landfills annually. Drop off your kitchen scraps at our compost station (open daily 7 AM - 7 PM) and receive finished compost for your garden. We also offer rainwater harvesting workshops and maintain a seed library with heirloom varieties.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Events Section with Tabs -->
+        <section id="events">
+            <h2>Upcoming Events</h2>
+            <div class="tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="workshops">Workshops</button>
+                    <button class="tab-button" data-tab="community">Community Events</button>
+                    <button class="tab-button" data-tab="volunteer">Volunteer Days</button>
+                </div>
+                
+                <div class="tab-content active" id="workshops">
+                    <h3> Educational Workshops</h3>
+                    <ul style="line-height: 2;">
+                        <li><strong>December 7, 2024 - 10:00 AM:</strong> Winter Gardening Essentials - Learn how to maintain your garden through the cold season</li>
+                        <li><strong>December 14, 2024 - 10:00 AM:</strong> Companion Planting for Beginners - Discover which plants grow best together</li>
+                        <li><strong>December 21, 2024 - 2:00 PM:</strong> Seed Saving Workshop - Preserve heirloom varieties for next season</li>
+                        <li><strong>January 11, 2025 - 10:00 AM:</strong> Organic Pest Management - Natural solutions for common garden pests</li>
+                    </ul>
+                </div>
+                
+                <div class="tab-content" id="community">
+                    <h3> Community Gatherings</h3>
+                    <ul style="line-height: 2;">
+                        <li><strong>December 15, 2024 - 5:00 PM:</strong> Holiday Harvest Festival - Celebrate the season with garden tours, live music, and fresh produce market</li>
+                        <li><strong>December 22, 2024 - 12:00 PM:</strong> Winter Solstice Potluck - Bring a dish made with garden ingredients to share</li>
+                        <li><strong>January 1, 2025 - 9:00 AM:</strong> New Year Garden Cleanup - Start the year fresh with a community cleanup day</li>
+                        <li><strong>January 18, 2025 - 6:00 PM:</strong> Seed Swap & Social - Exchange seeds and gardening stories with fellow members</li>
+                    </ul>
+                </div>
+                
+                <div class="tab-content" id="volunteer">
+                    <h3> Get Involved - Volunteer Opportunities</h3>
+                    <ul style="line-height: 2;">
+                        <li><strong>Every Saturday, 8:00 AM - 12:00 PM:</strong> General Garden Maintenance - Weeding, watering, and beautification projects</li>
+                        <li><strong>Every Sunday, 10:00 AM - 1:00 PM:</strong> Compost Management - Help turn compost piles and process new materials</li>
+                        <li><strong>First Friday of Each Month, 3:00 PM:</strong> Youth Program Assistant - Help supervise and teach young gardeners</li>
+                        <li><strong>As Needed:</strong> Harvest Days - Assist with harvesting, sorting, and distributing produce to food banks</li>
+                    </ul>
+                    <p style="margin-top: 1rem;"><em>All volunteers receive free access to workshops and 10% discount on plot rentals!</em></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery">
+            <h2>Garden Gallery</h2>
+            <p>Take a visual tour through our beautiful community garden throughout the seasons.</p>
+            
+            <div class="gallery">
+                <div class="gallery-item" data-src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800">
+                    <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=400" alt="Community Garden Overview">
+                    <div class="gallery-caption">Garden Overview</div>
+                </div>
+                <div class="gallery-item" data-src="https://images.unsplash.com/photo-1592419044706-39796d40f98c?w=800">
+                    <img src="https://images.unsplash.com/photo-1592419044706-39796d40f98c?w=400" alt="Fresh Tomatoes">
+                    <div class="gallery-caption">Fresh Tomatoes</div>
+                </div>
+                <div class="gallery-item" data-src="https://images.unsplash.com/photo-1561337396-5e0242f34194?w=800">
+                    <img src="https://images.unsplash.com/photo-1561337396-5e0242f34194?w=400" alt="Garden Volunteers">
+                    <div class="gallery-caption">Community Volunteers</div>
+                </div>
+                <div class="gallery-item" data-src="https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800">
+                    <img src="https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=400" alt="Raised Garden Beds">
+                    <div class="gallery-caption">Raised Beds</div>
+                </div>
+                <div class="gallery-item" data-src="https://images.unsplash.com/photo-1622383563227-04401ab4e5ea?w=800">
+                    <img src="https://images.unsplash.com/photo-1622383563227-04401ab4e5ea?w=400" alt="Kids Learning">
+                    <div class="gallery-caption">Youth Program</div>
+                </div>
+                <div class="gallery-item" data-src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400" alt="Fresh Herbs">
+                    <div class="gallery-caption">Herb Garden</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lightbox -->
+        <div class="lightbox" id="lightbox">
+            <span class="lightbox-close">&times;</span>
+            <div class="lightbox-content">
+                <img src="" alt="Lightbox Image" id="lightbox-img">
+            </div>
+        </div>
+
+        <!-- Fresh Produce Section -->
+        <section id="produce">
+            <h2>Fresh Organic Produce</h2>
+            <p>Browse our selection of fresh, organically grown produce available for purchase. All proceeds support our community programs.</p>
+            
+            <div class="search-container">
+                <input type="text" class="search-box" id="searchBox" placeholder="Search for vegetables, herbs, or by season...">
+            </div>
+            
+            <div class="product-grid" id="productGrid">
+                <!-- Products will be loaded dynamically -->
+            </div>
+        </section>
+
+        <!-- Location Section with Map -->
+        <section id="location">
+            <h2>Visit Our Garden</h2>
+            <p><strong>Address:</strong> 123 Green Street, Community Plaza, Your City, State 12345</p>
+            <p><strong>Open Hours:</strong> Monday - Saturday: 7:00 AM - 7:00 PM | Sunday: 9:00 AM - 5:00 PM</p>
+            <p><strong>Parking:</strong> Free parking available on Green Street and Community Plaza parking lot</p>
+            
+            <div id="map"></div>
+            
+            <p style="margin-top: 1rem;"><em>The garden is easily accessible by public transportation. Bus routes 12, 45, and 67 stop within two blocks.</em></p>
+        </section>
+
+        <!-- Contact Form -->
+        <section id="contact">
+            <h2>Get In Touch</h2>
+            <p>Have questions? Want to join our community? Interested in volunteering? We'd love to hear from you!</p>
+            
+            <div class="success-message" id="successMessage">
+                Thank you for contacting Khanya's Community Garden! We've received your message and will respond within 24-48 hours. We look forward to connecting with you!
+            </div>
+            
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="John Doe">
+                    <span class="error-message">Please enter your full name</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required placeholder="john.doe@example.com">
+                    <span class="error-message">Please enter a valid email address</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required placeholder="(555) 123-4567">
+                    <span class="error-message">Please enter a valid 10-digit phone number</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="messageType">Inquiry Type *</label>
+                    <select id="messageType" name="messageType" required>
+                        <option value="">-- Select Type --</option>
+                        <option value="general">General Information</option>
+                        <option value="membership">Garden Plot Membership</option>
+                        <option value="volunteer">Volunteer Opportunities</option>
+                        <option value="workshop">Workshop Registration</option>
+                        <option value="donation">Donations & Sponsorship</option>
+                        <option value="events">Events & Bookings</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <span class="error-message">Please select an inquiry type</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Your Message *</label>
+                    <textarea id="message" name="message" required placeholder="Tell us how we can help you..."></textarea>
+                    <span class="error-message">Please enter your message (minimum 10 characters)</span>
+                </div>
+
+                <button type="submit" class="btn">Send Message 📧</button>
+            </form>
+            
+            <div style="margin-top: 2rem; padding: 1rem; background: #d5f4e6; border-radius: 5px;">
+                <h3>Other Ways to Connect</h3>
+                <p><strong> Phone:</strong> (555) GARDEN-1 / (555) 427-3361</p>
+                <p><strong> Email:</strong> info@khanyasgarden.org</p>
+                <p><strong>Follow Us:</strong> @KhanyasGarden on Facebook, Instagram, and Twitter</p>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background: linear-gradient(135deg, #27ae60 0%, #229954 100%); color: white; text-align

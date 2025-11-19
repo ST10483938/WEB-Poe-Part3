@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rosebank College - Home</title>
+    <style>
+
+        *{
+            margin: 0%;
+            padding: 0%;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #5f7a 0%,#f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        nav {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.1);
+        }
+
+        nav a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 2);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-content{
+            background: white;
+            border-radius: 15px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgbaa9(0,0,0,0,1);
+            margin-top: 2rem;
+        }
+
+        .home-content h1{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 60px;
+            color: darkred;
+            font-weight: bold;
+            text-decoration: underline;
+            text-align: center;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+
+        }
+
+        .about-content{
+            text-align: center;
+        }
+
+        .about-content h1{
+            font-size: 48px;
+            color: #333;
+            margin-bottom: 2rem;
+        }
+
+        .about-content p{
+            font-size: 18px;
+            line-height: 1.8;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-content h1{
+            font-size: 48px;
+            color: #333;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info{
+            font-size: 18px;
+            line-height: 2;
+        }
+
+        .contact-info .email{
+            font-family: 'Bauhaus 93', Arial, Helvetica, sans-serif;
+            font-size: 30px;
+            text-decoration: overline;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .contact-info .details{
+            font-size: 18px;
+            color: #555;
+        }
+
+        .page-selector{
+            text-align: center;
+            margin: 2rem 0;
+
+        }
+         .page-selector button{
+            margin: 0 10px;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+
+         }
+
+         .page-selector button:hover{
+            background: #764ba2;
+            transform: scale(1.05);
+         }
+
+         .page-selector button.active{
+            background: darkred;
+         }
+
+         .page{
+            display: none;
+         }
+
+         .page.active{
+            display: block;
+         }
+
+         @media (max-width: 768px){
+            nav ul{
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .home-content h1{
+                font-size: 40px;
+            }
+
+            .about-content h1,
+            .contact-content h1{
+                font-size: 32px;
+            }
+
+            .contact-info .email{
+                font-size: 24px;
+            }
+         }
+        
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#" onclick="showPage('home')">Home</a></li>
+            <<li><a href="#" onclick="showPage('about')">about</a></li>
+            <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="page-selector">
+            <button onclick="showPage('home')" id="homeBtn" class="active">Home Page</button>
+            <button onclick="showPage('about')" id="aboutBtn">About Page</button>
+            <button onclick="showPage('contact')" id="contactBtn">Contact Page</button>
+        </div>
+    
+
+    <div id="homePage" class="page active">
+        <div class="page-content home-content">
+            <h1>Welcome to Rosebank College</h1>
+            <div style="text-align: center; margin-top: 2rem;">
+                <p style="font-size: 20px; color: #666;">Exellence in Education Sine 1996</p>
+                <p style="font-size: 16px; color: #888; margin-top: 1rem;">
+                    Empowering students to achieve their dreams through quality education anf innovative learnimg approachs.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="aboutPage" class="page">
+        <div class="page-content about-content">
+            <h1>About Rosebank College</h1>
+            <p>Rosebank College is aleading private higher education institution in South Africa,
+                 comited to providing quality education and training programs. We offer a wide range of 
+                 undergraduate and postgraduate programs designed to meetthe needs of today's dynamic job market
+            </p>
+            <br>
+            <p>
+                Our college prides itself on small class sizes, personalized attention, and practical
+                 learning approaches that prepare students for successful careers, with eperienced 
+                 faculty members and state-of-the-art facilities, we create an environment where 
+                 students can thrive academically and personally
+            </p>
+            <br>
+            <p>
+                At Rosebank College, we believe in nurturing not just academic excellence, but also 
+                developing well-rounded individuals who are ready to make meaningful contributions
+                 to society and the global economy
+            </p>
+        </div>
+    </div>
+
+    <div id="contactPage" class="page">
+        <div class="page-content contact-content">
+            <h1>Contact Us</h1>
+            <div class="contact-info">
+                <div class="email">info@rosebankcollege.co.za</div>
+                <div class="details">
+                    <p><strong>Address:</strong><br>
+                    Rosebank College<br>
+                    123 Oxford Road<br>
+                    Rosebank, Johannesburg<br>
+                    2196, South Africa</p>
+
+                    <p style="margin-top: 1rem;"><strong>Phone:</strong> +27 11 447 3700</p>
+                    <p><strong>Fax:</strong> +27 11 447 3800</p>
+
+                    <p style="margin-top: 1rem;"><strong>Office Hours:</strong><br>
+                    Monday - Friday: 8:00 AM - 5:00 PM<br>
+                    Saturday: 8:00 AM - 1:00 PM<br>
+                    Sunday: Closed</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script>
+        function showPage(pageName) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page=>{
+                page.classList.remove('active');
+            });
+
+            const buttons= document.querySelectorAll('.page-selector button');
+            button.forEach(button =>{
+                button.classList.remove('active');
+            });
+
+            document.getElementById(pageName + 'Page').classList.add('active');
+            document.getElementById(pageName +'Btn').classList.add('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', function(){
+            showPage('home');
+        })
+    </script>
+</body>
+</html>

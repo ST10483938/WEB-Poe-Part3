@@ -1,0 +1,47 @@
+import java.util.Scanner;
+import java.util.ArrayList;
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String [] Stadiums = {"Kingsmead", "St Georges", "Wanderers"};
+        String [] Batsmen = {"Jacques Kallis", "Hashim Amla", "AB De Villiers"};
+        int [][] runs = {{5000, 3800, 4200},
+                {3500,3700,3900},
+                {6200,5000,5200}};
+
+
+        System.out.println("SA CRICKETER APPLICATION");
+        System.out.println("-----------------------------------------");
+
+        for(int i = 0; i < Batsmen.length; i++){
+            for(int j = 0; j < Stadiums.length; j++){
+               System.out.print("Enter the number runs scored by " + Batsmen[j] + "at" + Stadiums[j] + ": ");
+                runs[i][j] = scanner.nextInt();
+            }
+        }
+
+        System.out.println("RUNS SCORED REPORT");
+        System.out.println("----------------------------------------");
+        System.out.println();
+
+        for(int i = 0; i < Stadiums.length; i++){
+            for(int j = 0; j < Batsmen.length; j++){
+                System.out.print("Enter the number runs scored by " + Batsmen[j] + "at" + Stadiums[j] + ": ");
+                runs[i][j] = scanner.nextInt();
+            }
+        }
+        System.out.println("Enter the number runs scored by Jacques Kallis at Kingsmead: ");
+        System.out.println("Enter the number runs scored by Hashim Amla at Kingsmead: ");
+        System.out.println("Enter the number runs scored by AB De Villiers at Kingsmead: ");
+        System.out.println("Enter the number runs scored by Jacques Kallis at St Georges: ");
+        System.out.println("Enter the number runs scored by Hashim Amla at St Georges: ");
+        System.out.println("Enter the number runs scored by AB De Villiers at St Georges: ");
+        System.out.println("Enter the number runs scored by Jacques Kallis at St Wanderers: ");
+        System.out.println("Enter the number runs scored by Hashim Amla at Wanderers: ");
+        System.out.println("Enter the number runs scored by AB De Villiers at Wanderers: ");
+
+
+
+
+        }
+    }

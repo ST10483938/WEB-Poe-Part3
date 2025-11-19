@@ -1,0 +1,354 @@
+<!DOCTYPE html> 
+<html lang="en"> 
+    <head> 
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Join Khanya's Community Garden as a volunteer, make a donation, or become a partner in fighting food insecurity in Khayelitsha"> 
+        <title>Get Involved - Khanya's Community Garden</title> 
+        <link rel="stylesheet" href="../Web Project Proposal/style.css/style.css"> 
+        
+    </head>
+     <body>
+            
+         <!-- Header with Navigation --> 
+        <header> 
+             <nav class="navbar"> 
+                 <div class="nav-container"> 
+                     <div class="logo">
+                         <img src="../images/logo.png" alt="Khanya's Community Garden Logo">
+                         <span>Khanya's Community Garden</span> 
+                     </div>
+                     
+                     <!-- Mobile menu button --> 
+                    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu">
+                      <span></span> 
+                      <span></span>
+                      <span></span>
+               </button>
+                                 
+                   <!-- Navigation menu -->
+                   <ul class="nav-menu" id="navMenu">
+                        <li><a href="index.html" class="nav-link">Home</a></li>
+                        <li><a href="about.html" class="nav-link">About Us</a></li> 
+                        <li><a href="services.html" class="nav-link">Programs</a></li> 
+                        <li><a href="getinvolved.html" class="nav-link active">Get Involved</a></li> 
+                      <li><a href="contact.html" class="nav-link">Contact</a></li> 
+                    </ul>
+                 </div>
+             </nav> 
+       </header>
+                                    
+        <!-- Main Content -->
+         <main> 
+              <!-- Page Header -->
+             <section class="page-header"> 
+                 <div class="container"> 
+                        <h1>Get Involved</h1>
+                         <p class="page-subtitle">Join our mission to fight food insecurity and build a stronger community. There are many ways to make a difference!</p> 
+                </div>                       
+            </section> 
+                                            
+                
+            <!-- Ways to Help Section -->                                    
+            <section class="ways-to-help">                                        
+                <div class="container">                                 
+                    <h2>Ways to Make a Difference</h2>                                                  
+                    <div class="help-options">                                                     
+                        <div class="help-card">                                                       
+                            <h3>Volunteer Your Time</h3>                                                           
+                            <p>Join our community of dedicated volunteers in garden maintenance, education programs, and community outreach activities.</p>                                                           
+                            <ul>                                                        
+                                <li>Garden maintenance and planting</li>                         
+                                <li>Workshop assistance and translation</li>                                                                
+                                <li>Administrative support</li>                                                  
+                                <li>Event coordination and setup</li>                                                             
+                            </ul>
+                            <a href="#volunteer-form" class="btn btn-primary">Volunteer Now</a>                                                             
+                        </div> 
+                                                               
+                        <div class="help-card">                                                                 
+                            <h3>Make a Donation</h3>                                                                                          
+                            <p>Your financial contribution helps us purchase seeds, tools, and educational materials while supporting our operational costs.</p>                                                                                              
+                            <div class="donation-amounts">                                         
+                                <span class="amount">R50 - Seeds for a season</span>                                                                         
+                                <span class="amount">R200 - Garden tools</span>                                                                        
+                                <span class="amount">R500 - Workshop materials</span>                                                                   
+                            </div>                                                                    
+                            <a href="#donation-form" class="btn btn-primary">Donate Today</a>                                                                 
+                        </div> 
+                                                                
+                        <div class="help-card">                                                                  
+                            <h3>Partner with Us</h3>                                                                     
+                            <p>Organizations, schools, and businesses can partner with us to expand our impact and reach more community members.</p>                                                                     
+                            <ul> 
+                                <li>Educational institution partnerships</li> 
+                                <li>Corporate social responsibility programs</li>                                                                       
+                                <li>Government collaboration opportunities</li>                                                                         
+                                <li>Community organization networks</li>
+                            </ul>
+                            <a href="#partnership-form" class="btn btn-primary">Partner with Us</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Volunteer Registration Form -->
+             <section class="volunteer-section" id="volunteer-form"> 
+                <div class="container"> <h2>Volunteer Registration</h2>
+                 <form class="volunteer-form" id="volunteerForm"> 
+                    <div class="form-group"> 
+                        <label for="volunteerName">Full Name *</label>
+                        <input type="text" id="volunteerName" name="name" required>
+                     </div> 
+                     
+                     <div class="form-group">
+                         <label for="volunteerEmail">Email Address *</label>
+                          <input type="email" id="volunteerEmail" name="email" required>
+                     </div> 
+                     
+                     <div class="form-group">
+                         <label for="volunteerPhone">Phone Number</label>                          
+                         <input type="tel" id="volunteerPhone" name="phone">                       
+                        </div> 
+                        
+                        <div class="form-group">
+                             <label for="volunteerAge">Age Group</label> 
+                             <select id="volunteerAge" name="age">
+                                 <option value="">Select age group</option> 
+                                 <option value="under-18">Under 18</option>
+                                 <option value="18-25">18-25</option> 
+                                 <option value="26-40">26-40</option> 
+                                 <option value="41-60">41-60</option>                               
+                                 <option value="over-60">Over 60</option> 
+                                </select>
+                             </div> 
+                             
+                             <div class="form-group"> 
+                                <label>Areas of Interest (Select all that apply):</label> <div class="checkbox-group"> 
+                                <label><input type="checkbox" name="interests" value="gardening"> Garden Maintenance</label> 
+                                <label><input type="checkbox" name="interests" value="education"> Educational Programs</label> 
+                                <label><input type="checkbox" name="interests" value="events"> Event Organization</label> 
+                                <label><input type="checkbox" name="interests" value="admin"> Administrative Support</label> 
+                                <label><input type="checkbox" name="interests" value="fundraising"> Fundraising</label> 
+                            </div> 
+                        </div> 
+                        
+                        <div class="form-group">
+                             <label>Availability:</label> <div class="checkbox-group"> 
+                                <label><input type="checkbox" name="availability" value="weekday-morning"> Weekday Mornings</label> 
+                                <label><input type="checkbox" name="availability" value="weekday-afternoon"> Weekday Afternoons</label> 
+                                <label><input type="checkbox" name="availability" value="weekend"> Weekends</label> 
+                                <label><input type="checkbox" name="availability" value="evening"> Evenings</label> 
+                            </div>
+                         </div> 
+                         
+                         <div class="form-group">
+                             <label for="volunteerExperience">Previous Experience (Optional)</label> 
+                             <textarea id="volunteerExperience" name="experience" rows="4" placeholder="Tell us about any relevant experience in gardening, community work, or education..."></textarea> 
+                        </div>
+                            
+                    
+                        <div class="form-group"> 
+                            <label for="volunteerMotivation">Why do you want to volunteer with us?</label> 
+                            <textarea id="volunteerMotivation" name="motivation" rows="4" required placeholder="Share what motivates you to join our community garden..."></textarea> 
+                        </div> 
+                        
+                        <button type="submit" class="btn btn-primary">Submit Application</button> 
+                    </form> 
+                </div> 
+            </section>
+            
+            
+            <!-- Donation Section --> 
+            <section class="donation-section" id="donation-form"> 
+                <div class="container"> 
+                    <h2>Support Our Mission</h2> 
+                    <p>Your donation directly supports our community programs, garden maintenance, and educational initiatives.</p> 
+                    
+                    <form class="donation-form" id="donationForm"> <div class="form-group"> 
+                        <label>Donation Amount:</label> 
+                        <div class="amount-buttons"> 
+                            <button type="button" class="amount-btn" data-amount="50">R50</button> 
+                            <button type="button" class="amount-btn" data-amount="100">R100</button> 
+                            <button type="button" class="amount-btn" data-amount="200">R200</button> 
+                            <button type="button" class="amount-btn" data-amount="500">R500</button> 
+                        </div>
+                        
+                        <div class="custom-amount"> <label for="customAmount">Custom Amount (R):</label> 
+                            <input type="number" id="customAmount" name="amount" min="10" placeholder="Enter amount"> 
+                        </div> 
+                    </div> 
+                    
+                    <div class="form-group">
+                         <label for="donorName">Full Name *</label> 
+                        <input type="text" id="donorName" name="name" required> 
+                    </div> 
+                   
+                    <div class="form-group"> 
+                        <label for="donorEmail">Email Address *</label> 
+                        <input type="email" id="donorEmail" name="email" required> 
+                    </div> 
+                    
+                    <div class="form-group">
+                         <label>Donation Type:</label> 
+                         <div class="radio-group">
+                             <label><input type="radio" name="donationType" value="one-time" checked> One-time donation</label>
+                              <label><input type="radio" name="donationType" value="monthly"> Monthly recurring</label>
+                             
+                            </div> 
+                        </div> 
+                        
+                        <div class="form-group"> 
+                            <label for="donationPurpose">Specific Purpose (Optional):</label> 
+                            <select id="donationPurpose" name="purpose"> 
+                                <option value="">General Support</option> 
+                                
+                                <option value="seeds">Seeds and Plants</option> 
+                                <option value="tools">Garden Tools and Equipment</option> 
+                                <option value="education">Educational Programs</option> 
+                                <option value="youth">Youth Development</option> 
+                                <option value="infrastructure">Garden Infrastructure</option> 
+                            </select> 
+                        </div> 
+                        
+                        <div class="form-group"> 
+                            <label><input type="checkbox" name="newsletter" value="yes"> Subscribe to our newsletter for updates</label> 
+                        </div> 
+                        
+                        <button type="submit" class="btn btn-primary">Proceed to Payment</button> 
+                    </form> 
+                    
+                    <div class="payment-info"> 
+                        <p><strong>Secure Payment:</strong> We use PayFast and other secure payment methods. Your donation is safe and goes directly to community programs.</p> 
+                    </div> 
+                </div> 
+            </section>
+            
+            <!-- Partnership Form --> 
+            <section class="partnership-section" id="partnership-form"> <div class="container"> 
+                <h2>Partnership Opportunities</h2> 
+                <form class="partnership-form" id="partnershipForm"> 
+                    <div class="form-group"> 
+                        <label for="orgName">Organization Name *</label> 
+                        <input type="text" id="orgName" name="organization" required> 
+                    </div> 
+                    
+                    <div class="form-group"> 
+                        <label for="contactName">Contact Person *</label> 
+                        <input type="text" id="contactName" name="contact" required> 
+                    </div> 
+                    
+                    <div class="form-group"> 
+                        <label for="contactEmail">Email Address *</label> 
+                        <input type="email" id="contactEmail" name="email" required>             
+                    </div> 
+                    
+                    <div class="form-group"> 
+                        <label for="contactPhone">Phone Number</label> 
+                        <input type="tel" id="contactPhone" name="phone"> 
+                    </div> 
+                    
+                    <div class="form-group"> 
+                        <label for="orgType">Organization Type</label> 
+                        <select id="orgType" name="type"> 
+                            <option value="">Select type</option> 
+                            <option value="school">Educational Institution</option> 
+                            <option value="business">Business/Corporate</option> 
+                            <option value="ngo">NGO/Non-profit</option> <option value="government">Government Agency</option> 
+                            <option value="community">Community Organization</option> 
+                            <option value="other">Other</option> 
+                        </select> 
+                    </div> 
+                    
+                    <div class="form-group"> 
+                        <label>Partnership Interest:</label> 
+                        <div class="checkbox-group"> 
+                            <label><input type="checkbox" name="partnership" value="funding"> Funding Support</label> 
+                            <label><input type="checkbox" name="partnership" value="volunteers"> Employee Volunteers</label> 
+                            <label><input type="checkbox" name="partnership" value="expertise"> Technical Expertise</label> 
+                            <label><input type="checkbox" name="partnership" value="resources"> Resource Sharing</label> 
+                            <label><input type="checkbox" name="partnership" value="education"> Educational Partnership</label> 
+                            <label><input type="checkbox" name="partnership" value="events"> Joint Events</label> 
+                        </div> 
+                    </div> 
+                    
+                    <div class="form-group"> 
+                        <label for="partnershipDetails">Partnership Proposal *</label> 
+                        <textarea id="partnershipDetails" name="proposal" rows="6" required placeholder="Please describe your partnership idea, what you can offer, and how you envision collaborating with us..."></textarea> 
+                    </div> 
+                    
+                    <button type="submit" class="btn btn-primary">Submit Partnership Inquiry</button> 
+                </form> 
+            </div> 
+        </section> 
+        
+        <!-- Volunteer Opportunities --> 
+        <section class="opportunities"> 
+            <div class="container"> 
+                <h2>Current Volunteer Opportunities</h2> 
+                <div class="opportunity-grid"> <div class="opportunity-card"> 
+                    <h3>Weekend Garden Maintenance</h3> <p><strong>When:</strong> Saturdays, 8:00 AM - 12:00 PM</p> 
+                    <p><strong>What:</strong> Weeding, watering, planting, and general garden upkeep</p> 
+                    <p><strong>Commitment:</strong> 2-3 Saturdays per month</p> 
+                    <span class="urgency high">High Priority</span> 
+                </div> 
+                
+                <div class="opportunity-card"> <h3>Education Workshop Assistant</h3> 
+                    <p><strong>When:</strong> Flexible scheduling</p> 
+                    <p><strong>What:</strong> Help facilitate workshops and translate for participants</p> 
+                    <p><strong>Skills:</strong> Multilingual preferred (English, Xhosa, Afrikaans)</p> 
+                    <span class="urgency medium">Ongoing Need</span> </div> <div class="opportunity-card"> 
+                        <h3>Youth Program Mentor</h3> <p><strong>When:</strong> After school hours and weekends</p> 
+                        <p><strong>What:</strong> Guide young people in gardening and leadership skills</p> 
+                        <p><strong>Commitment:</strong> 6-month minimum</p> <span class="urgency medium">Seasonal</span> 
+                    </div> 
+                    
+                    <div class="opportunity-card"> 
+                        <h3>Social Media and Communications</h3> 
+                        <p><strong>When:</strong> Remote work, flexible hours</p> 
+                        <p><strong>What:</strong> Help manage social media, create content, write newsletters</p> 
+                        <p><strong>Skills:</strong> Social media, writing, photography</p> 
+                        <span class="urgency low">As Needed</span> 
+                    </div> 
+                </div> 
+            </div> 
+        </section> 
+    </main> 
+    
+    <!-- Footer --> 
+    <footer> 
+        <div class="container"> 
+            <div class="footer-content"> 
+                <div class="footer-section"> 
+                    <h4>Khanya's Community Garden</h4> 
+                    <p>Growing community, fighting food insecurity, building hope in Khayelitsha.</p> 
+                </div> 
+                <div class="footer-section"> 
+                    <h4>Quick Links</h4> 
+                    <ul> 
+                        <li><a href="about.html">About Us</a></li> 
+                        <li><a href="services.html">Programs</a></li> 
+                        <li><a href="getinvolved.html">Volunteer</a></li> 
+                        <li><a href="contact.html">Contact</a></li> 
+                    </ul> 
+                </div> 
+                
+                <div class="footer-section"> 
+                    <h4>Contact Info</h4> 
+                    <p>Khayelitsha, Cape Town<br> 
+                        Western Cape, South Africa<br> 
+                        Email: info@khanyagarden.org<br> 
+                        Phone: +27 21 123 4567</p> 
+                    </div> 
+                </div> 
+                
+                <div class="footer-bottom"> 
+                    <p>&copy; 2024 Khanya's Community Garden. All rights reserved.</p> 
+                </div> 
+            </div> 
+        </footer> 
+        
+        <!-- JavaScript --> 
+        <script src="js/script.js"></script> 
+    </body> 
+    </html>
